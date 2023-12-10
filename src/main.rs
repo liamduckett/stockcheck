@@ -16,5 +16,7 @@ fn main() {
         .read_line(&mut actual_pizzas)
         .expect("Failed to read input (actual_pizzas)");
 
-    println!("You have {} pizzas.", actual_pizzas.trim());
+    let actual_pizzas = actual_pizzas.trim();
+
+    println!("You have {actual_pizzas} pizzas.");
 }
