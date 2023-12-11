@@ -10,15 +10,8 @@ fn main() {
     let actual_pizzas: u8 = get_actual_food("pizzas");
     let actual_burgers: u8 = get_actual_food("burgers");
 
-    let needed_pizzas: u8 = match expected_pizzas.checked_sub(actual_pizzas) {
-        None => 0,
-        Some(result) => result,
-    };
-
-    let needed_burgers: u8 = match expected_burgers.checked_sub(actual_burgers) {
-        None => 0,
-        Some(result) => result,
-    };
+    let needed_pizzas: u8 = get_needed_food(expected_pizzas, actual_pizzas);
+    let needed_burgers: u8 = get_needed_food(expected_burgers, actual_burgers);
 
     println!("You need {needed_pizzas} pizzas.");
     println!("You need {needed_burgers} burgers.");
@@ -43,4 +36,11 @@ fn get_actual_food(food: &str) -> u8 {
            Ok(data) => break data,
        };
    };
+}
+
+fn get_needed_food(expected_food: u8, actual_food: u8) -> u8 {
+    return match expected_food.checked_sub(actual_food) {
+        None => 0,
+        Some(result) => result,
+    };
 }
