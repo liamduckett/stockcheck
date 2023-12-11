@@ -1,11 +1,11 @@
 use std::io::Write;
 
 fn main() {
-    let expected_pizzas = 2;
+    let expected_pizzas: u8 = 2;
 
     println!("You expect {expected_pizzas} pizzas.");
 
-    let actual_pizzas = loop {
+    let actual_pizzas: u8 = loop {
         print!("How many pizzas do you currently have: ");
 
         std::io::stdout()
@@ -25,4 +25,11 @@ fn main() {
     };
 
     println!("You have {actual_pizzas} pizzas.");
+
+    let needed_pizzas: u8 = match expected_pizzas.checked_sub(actual_pizzas) {
+        None => 0,
+        Some(result) => result,
+    };
+
+    println!("You need {needed_pizzas} pizzas.");
 }
