@@ -1,20 +1,46 @@
 use std::io::Write;
 
 fn main() {
-    let expected_pizzas:  u8 = 2;
-    let expected_burgers: u8 = 4;
+    let mut pizza = build_food("pizzas", 2);
 
-    println!("You expect {expected_pizzas} pizzas.");
-    println!("You expect {expected_burgers} burgers.");
+    println!("You expect {} {}.", pizza.expected, pizza.name);
 
-    let actual_pizzas: u8 = get_actual_food("pizzas");
-    let actual_burgers: u8 = get_actual_food("burgers");
+    pizza = pizza.get_actual()
+                 .get_needed();
 
-    let needed_pizzas: u8 = get_needed_food(expected_pizzas, actual_pizzas);
-    let needed_burgers: u8 = get_needed_food(expected_burgers, actual_burgers);
+    println!("You need {} {}.", pizza.needed, pizza.name);
+}
 
-    println!("You need {needed_pizzas} pizzas.");
-    println!("You need {needed_burgers} burgers.");
+struct Food {
+    name: String,
+    expected: u8,
+    actual: u8,
+    needed: u8,
+}
+
+impl Food {
+    fn get_actual(self) -> Food {
+        return Food {
+            actual: get_actual_food(&self.name),
+            ..self
+        };
+    }
+
+    fn get_needed(self) -> Food {
+        return Food {
+            needed: get_needed_food(self.expected, self.actual),
+            ..self
+        }
+    }
+}
+
+fn build_food(name: &str, expected: u8) -> Food {
+    return Food {
+        name: String::from(name),
+        expected: expected,
+        actual: 0,
+        needed: 0,
+    }
 }
 
 fn get_actual_food(food: &str) -> u8 {
