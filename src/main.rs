@@ -7,8 +7,6 @@ fn main() {
 
     let actual_pizzas: u8 = get_actual_food("pizzas");
 
-    println!("You have {actual_pizzas} pizzas.");
-
     let needed_pizzas: u8 = match expected_pizzas.checked_sub(actual_pizzas) {
         None => 0,
         Some(result) => result,
