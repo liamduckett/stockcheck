@@ -2,13 +2,19 @@ use std::io::Write;
 
 fn main() {
     let mut pizza = build_food("pizzas", 2);
+    let mut burgers = build_food("burgers", 4);
 
-    println!("You expect {} {}.", pizza.expected, pizza.name);
+    let mut foods: [Food; 2] = [pizza, burgers];
 
-    pizza = pizza.get_actual()
-                 .get_needed();
+    for food in &foods {
+        println!("You expect {} {}.", food.expected, food.name);
+    }
 
-    println!("You need {} {}.", pizza.needed, pizza.name);
+    let foods = foods.map(|food| food.get_actual().get_needed());
+
+    for food in &foods {
+        println!("You need {} {}.", food.needed, food.name);
+    }
 }
 
 struct Food {
