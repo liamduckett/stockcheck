@@ -1,10 +1,10 @@
 use std::io::Write;
 
 fn main() {
-    let mut pizza = build_food("pizzas", 2);
-    let mut burgers = build_food("burgers", 4);
+    let pizza = build_food("pizzas", 2);
+    let burgers = build_food("burgers", 4);
 
-    let mut foods: [Food; 2] = [pizza, burgers];
+    let foods: [Food; 2] = [pizza, burgers];
 
     for food in &foods {
         println!("You expect {} {}.", food.expected, food.name);
